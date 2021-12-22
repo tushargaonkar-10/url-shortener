@@ -87,4 +87,4 @@ app.get('/:shortUrl', async (req, res) => {
     }
 });
 
-app.listen(process.env.port || 8000);
+app.listen(process.env.PORT || 8000);
