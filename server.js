@@ -38,6 +38,7 @@ app.post('/shortUrls', async (req, res) => {
         if (url == null) {
             throw { message: "url cannot be empty" };
         } else {
+            console.log('full url ' + url);
             await shortUrl.create({ url: req.body.url });
 
             res.redirect('/');
