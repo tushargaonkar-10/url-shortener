@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const logger = require("./logger");
+const morgan = require("morgan");
 
 const shortUrl = require("./models/shortUrl");
 
@@ -12,12 +14,13 @@ mongoose.connect('mongodb+srv://task:task@clusterurlshortener.nrqrt.mongodb.net/
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }))
+app.use(morgan('short'));
 
 //route to list all urls
 app.get('/', async (req, res) => {
 
     try {
-        const shortUrls = await shortUrl.find().sort({ _id: "desc" });;
+        const shortUrls = await shortUrl.find().sort({ _id: "desc" });
         res.render('index', { shortUrls: shortUrls });
     } catch (error) {
         console.log('Error in shortUrls' + error);
